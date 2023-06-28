@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -10,7 +14,19 @@ public class IndiceMasaCorporal {
     //region Attributes
     private Integer id;
     private Boolean estado;
+    @DateTimeFormat(
+            pattern = "yyyy-MM-dd"
+    )
+    @NotNull(
+            message = "Debes introducir una fecha"
+    )
+    @Past(
+            message = "La fecha ingresada es incorrecta"
+    )
     private LocalDate fechaImc;
+    @NotNull(
+            message = "Debes seleccionar un usuario"
+    )
     private Usuario usuario;
     //endregion
 

@@ -1,5 +1,10 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public class Receta {
@@ -7,10 +12,52 @@ public class Receta {
     //region Attributes
     private Integer id;
     private Boolean estado;
+    @NotBlank(
+            message = "Introduce un nombre"
+    )
+    @Size(
+            min = 3,
+            max = 30,
+            message = "El nombre solo puede contener entre 3 y 30 caracteres"
+    )
+    @Pattern(
+            regexp = "[a-z A-Z]+",
+            message = "Solo puede contener letras"
+    )
     private String nombre;
+    @NotBlank(
+            message = "Debes introducir una categoria"
+    )
+    @Pattern(
+            regexp = "carnes|bebidas|dulces|ensaladas|legumbres y cereales|pescados|pan|sopas y cremas",
+            flags = Pattern.Flag.CASE_INSENSITIVE
+    )
     private String categoria;
+    @NotNull(
+            message = "Debes seleccionar un usuario"
+    )
     private List<Ingrediente> ingredientes;
+    @NotBlank(
+            message = "Introduce un nombre"
+    )
+    @Size(
+            min = 3,
+            max = 30,
+            message = "La preparación solo puede contener entre 3 y 30 caracteres"
+    )
+    @Pattern(
+            regexp = "[a-z A-Z 0-9]+",
+            message = "Solo no puede contener caracteres especiales"
+    )
     private String preparacion;
+    @NotBlank(
+            message = "Introduce una dirección URL"
+    )
+    @Size(
+            min = 10,
+            max = 30,
+            message = "La dirección URL de la imagen solo puede contener entre 10 y 30 caracteres"
+    )
     private String imagen;
     //endregion
 
