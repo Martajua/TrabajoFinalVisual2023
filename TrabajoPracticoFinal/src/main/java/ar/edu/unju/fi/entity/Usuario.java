@@ -1,18 +1,78 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
+@Component
 public class Usuario {
 
     //region Attributes
     private Integer id;
     private Boolean estado;
+    @NotBlank(
+            message = "Introduce un nombre"
+    )
+    @Size(
+            min = 3,
+            max = 30,
+            message = "El nombre solo puede contener entre 3 y 30 caracteres"
+    )
+    @Pattern(
+            regexp = "[a-z A-Z]+",
+            message = "Solo puede contener letras"
+    )
     private String nombre;
+    @NotBlank(
+            message = "Introduce un apellido"
+    )
+    @Size(
+            min = 3,
+            max = 30,
+            message = "El apellido solo puede contener entre 3 y 30 caracteres"
+    )
+    @Pattern(
+            regexp = "[a-z A-Z]+",
+            message = "Solo puede contener letras"
+    )
     private String apellido;
+
+    @Email(
+            message = "Email no es correcto", regexp = ".*"
+    )
+    @NotBlank(
+            message = "Debes introducir un email"
+    )
     private String email;
+    @DateTimeFormat(
+            pattern = "yyyy-MM-dd"
+    )
+    @PastOrPresent(
+            message = "La fecha ingresada es incorrecta"
+    )
+    @NotNull(
+            message = "Debes introducir una fecha"
+    )
     private LocalDate fechaNacimiento;
+    @NotBlank(
+            message = "Debes introducir un número de teléfono"
+    )
+    @Pattern(
+            regexp = "0388-[0-9]{3}-[0-9]{4}"
+    )
     private String telefono;
+    @NotBlank(
+            message = "Debes introducir tu sexo"
+    )
+    @Pattern(
+            regexp = "masculino|femenino",
+            flags = Pattern.Flag.CASE_INSENSITIVE
+    )
     private String sexo;
+    @NotEmpty(message = "Debes introducir tu estatura")
+    @Min(0)
     private Float estatura;
     //endregion
 
