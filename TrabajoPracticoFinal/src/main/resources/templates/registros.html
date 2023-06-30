@@ -18,7 +18,7 @@
 	<div class="b-example-divider"></div>
 	<!-- CONTENIDO PRIMARIO -->
 		<!-- Inicio del contenido de la pagina -->
-		<form class="text-center" class="form-signin" th:object="${...}" method="post">
+		<form th:action="${edicion}?@{/registro/modificar}:@{/registro/guardar}" class="text-center" class="form-signin" th:object="${registro}" method="post">
 			<img class="mb-4" th:src="" width="72" height="57">
 			<h1 class="h3 mb-3 fw-normal">REGISTRATE</h1>
 				<div class="form-floating">
