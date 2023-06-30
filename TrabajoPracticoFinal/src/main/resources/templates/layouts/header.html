@@ -2,11 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 		<meta charset="UTF-8">
-		 <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
 	</head>
 	<body>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<div class="container">
+		<header  th:fragment="header" 
+			class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+			<a href="/"
+				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+				<!-- LOGO -->
+			</a>
+			<ul
+				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				<!-- IMAGEN -->
+			</ul>
+
+			<div class="col-md-3 text-end">
+				<ul class="nav">
+					<!-- redirigir al inicio de sesion -->
+					<li class="nav-item"><a th:href="@{}"
+						class="nav-link link-dark px-2">Iniciar Sesión</a></li>
+					<li class="nav-item"><a th:href="@{}"
+						class="nav-link link-dark px-2">Registrase</a></li>
+				</ul>
+				<!-- VER QUE FUNCIONA MEJOR -->
+				<!-- <button type="button" class="btn btn-outline-primary me-2">Login</button>
+				<button type="button" class="btn btn-primary">Sign-up</button> -->
+			</div>
+		</header>
+	</div>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	</body>
 </html>
