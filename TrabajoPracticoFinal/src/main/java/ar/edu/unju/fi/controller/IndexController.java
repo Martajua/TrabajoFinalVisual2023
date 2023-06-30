@@ -10,7 +10,7 @@ public class IndexController {
 	 * devuelve la pagina a mostrar.
 	 * @return
 	 */
-	@GetMapping("index")
+	@GetMapping("/index")
 	public String getIndex() {
 		return "inicio";
 	}
