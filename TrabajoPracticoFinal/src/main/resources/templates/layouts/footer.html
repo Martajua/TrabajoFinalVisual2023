@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
+	    
+	    
+	</head>
+	<body>
+	<div class="container">
+		<footer th:fragment="footer"
+			class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+			<div class="col mb-3">
+				<a>
+				<!-- IMAGEN -->
+				</a>
+				<p class="text-muted">&copy; 2023</p>
+			</div>
+
+			<div class="col mb-3"></div>
+
+			<div class="col mb-3">
+				<h5>Servicios</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Calcular IMC</a></li>
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Peso Ideal</a></li>
+				</ul>
+			</div>
+
+			<div class="col mb-3">
+				<h5>Aprender</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Recetas</a></li>
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Testimonios</a></li>
+				</ul>
+			</div>
+
+			<div class="col mb-3">
+				<h5>Acceso y Contacto</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Registrate</a></li>
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Iniciar Sesión</a></li>
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Contacto</a></li>
+					<li class="nav-item mb-2"><a th:href="@{}"
+						class="nav-link p-0 text-muted">Gestión de Datos</a></li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

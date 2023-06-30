@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+	<nav th:fragment="nav" class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container">
+			<!-- img  -->
+			<a class="navbar-brand" th:href="#"> <img
+				src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap"
+				width="30" height="24">
+			</a>
+		</div>
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{}">INICIO</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" th:href="@{}">Registrate</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" th:href="@{}"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Servicios</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{}">Calcular IMC</a></li>
+							<li><a class="dropdown-item" th:href="@{}">Peso Ideal</a></li>
+						</ul></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{}">Recetas</a>
+					</li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{}">Testimonios</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" th:href="@{}"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							GESTIÓN DE DATOS </a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" th:href="@{}">Inicio Sesion</a></li>
+							<li><a class="dropdown-item" th:href="@{}">Recetas</a></li>
+							<li><a class="dropdown-item" th:href="@{}">"..."</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

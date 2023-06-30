@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gestión de Datos</title>
+		<!-- imagen que podemos poner fijarse -->
+		<link th:rel="shortcut icon" th:href="@{../static/images/PONERIMAGEN.JPG}"> 
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
+	</head>
+	<body>
+	<!-- ENCABEZADO -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<div class="b-example-divider"></div>
+	<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+	<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		<form class="text-center" class="form-signin">
+			<img class="mb-4" th:src="" width="72" height="57">
+			<h1 class="h3 mb-3 fw-normal">INICIO DE SESION</h1>
+				<div class="form-floating">
+				<input type="email" class="form-control" id="floatingInput"
+									placeholder="usuario@ejemplo.com">
+					<label for="floatingInput">Correo electrónico</label>
+				</div>
+				<div class="form-floating">
+				<input type="password" class="form-control" id="floatingPassword"
+									placeholder="Contraseña">
+					<label for="floatingPassword">Contraseña</label>
+				</div>
+				<div class="checkbox mb-3">
+					<label>
+				<input type="checkbox" value="remember-me"> Recuérdame
+					</label>
+				</div>
+			<button class="w-100 btn btn-lg btn-outline-secondary" type="submit">Ingresar</button>
+		</form>
+		
+		<!-- Final del contenido de la pagina  -->
+	<!-- CONTENIDO SECUNDARIO -->
+		<aside th:replace="~{layouts/aside :: aside}"></aside>
+		<div class="b-example-divider"></div>
+	<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Contacto</title>
+		<!-- imagen que podemos poner fijarse -->
+		<link th:rel="shortcut icon" th:href="@{../static/images/PONERIMAGEN.JPG}"> 
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
+	</head>
+	<body>
+	<!-- ENCABEZADO -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<div class="b-example-divider"></div>
+	<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+	<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		
+		
+		<!-- Final del contenido de la pagina  -->
+	<!-- CONTENIDO SECUNDARIO -->
+		<aside th:replace="~{layouts/aside :: aside}"></aside>
+		<div class="b-example-divider"></div>
+	<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

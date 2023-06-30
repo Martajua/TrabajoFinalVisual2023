@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Recetas</title>
+		<!-- imagen que podemos poner fijarse -->
+		<link th:rel="shortcut icon" th:href="@{../static/images/PONERIMAGEN.JPG}">
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
+	</head>
+	<body>
+	<!-- ENCABEZADO -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<div class="b-example-divider"></div>
+	<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+	<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+	<section class="py-5 text-center container">
+		<div class="row py-lg-5">
+			<div class="col-lg-6 col-md-8 mx-auto">
+				<h1 class="fw-light">RECETAS</h1>
+				<p class="lead text-muted">¡Bienvenido/a a nuestra sección de
+					recetas saludables de nutrición! Aquí encontrarás una variedad de
+					opciones deliciosas y nutritivas para ayudarte a mantener una
+					alimentación saludable y equilibrada. Nuestras recetas están
+					diseñadas para satisfacer tus necesidades nutricionales y gustos
+					personales. Desde opciones vegetarianas y veganas hasta platos
+					bajos en carbohidratos y ricos en proteínas, tenemos algo para
+					todos los gustos. Además, nuestras recetas son fáciles de preparar
+					y no requieren ingredientes costosos o difíciles de encontrar. Nos
+					enfocamos en utilizar alimentos frescos y naturales para ayudarte a
+					mantener una alimentación saludable y sostenible. Ya sea que estés
+					buscando opciones para el desayuno, el almuerzo, la cena o los
+					refrigerios, nuestras recetas te brindarán opciones deliciosas y
+					nutritivas para satisfacer tus necesidades diarias. ¡Explora
+					nuestra selección de recetas y comienza a disfrutar de una
+					alimentación saludable hoy mismo!</p>
+				<div class="dropdown">
+  					<button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				    Categorias
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				    <li><a class="dropdown-item" th:href="#">Recetas de Carne</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Bebidas</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Dulces</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Ensaladas</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Legumbres y Cereales</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Pescados</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Pan</a></li>
+				    <li><a class="dropdown-item" th:href="#">Recetas de Sopas y Cremas</a></li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				<!-- espacio para las recetas -->
+				<!-- agregar mas recetas -->
+				<div class="col">
+					<div class="card shadow-sm">
+						<img class="bd-placeholder-img card-img-top" width="100%"
+							height="225"  role="img"
+							aria-label="Placeholder: Thumbnail"></img>
+						<div class="card-body">
+							<p class="card-text">NOMBRE</p>
+							<p class="card-text">preparacion...</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Final del contenido de la pagina  -->
+	<!-- CONTENIDO SECUNDARIO -->
+		<aside th:replace="~{layouts/aside :: aside}"></aside>
+		<div class="b-example-divider"></div>
+	<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
