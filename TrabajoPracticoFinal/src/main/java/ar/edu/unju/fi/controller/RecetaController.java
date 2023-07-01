@@ -7,23 +7,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.entity.Usuario;
-import ar.edu.unju.fi.service.IRegistroService;
+import ar.edu.unju.fi.entity.Receta;
+import ar.edu.unju.fi.service.IRecetasService;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/registro")
-public class RegistroController {
+@RequestMapping("/receta")
+public class RecetaController {
+	
 	/*
-	 * la anotación @RequestMapping("/registro") indica que todas las solicitudes
+	 * la anotación @RequestMapping("/receta") indica que todas las solicitudes
 	 * que comiencen con "/registro" serán manejadas por los métodos de este
 	 * controlador. Por ejemplo, si hay un método en el controlador con la
-	 * anotación @GetMapping("/listado"), se mapeará a la URL "/registro/listado".
+	 * anotación @GetMapping("/listado"), se mapeará a la URL "/receta/listado".
 	 */
-
+	
 	@Autowired
-	private IRegistroService registroService;
-
+	private IRecetasService recetaService;
+	
 	/**
 	 * Metodo que captura una peticion http en la forma de una url devuelve la
 	 * pagina a mostrar.
@@ -31,9 +32,9 @@ public class RegistroController {
 	 * @return
 	 */
 	@GetMapping("/listado")
-	public String getListaRegistros(Model model) {
-		//metodos de la capa service
-		return "VISTA DE REGISTROS";
+	public String getListaRecetas(Model model) {
+		// metodos de la capa service
+		return "recetas";
 	}
 	
 	/*
@@ -43,11 +44,11 @@ public class RegistroController {
 	 */
 	
 	@GetMapping("/nuevo")
-	public String getNuevoRegistro(Model model) {
+	public String getNuevaSucursalPage(Model model) {
 		boolean edicion = false;
 		//metodos de la capa service
 		model.addAttribute("edicion", edicion);
-		return "registros";
+		return "FORMULARIO DE INGREDIENTES DE RECETA";
 	}
 	
 	/*
@@ -56,11 +57,11 @@ public class RegistroController {
 	 */
 	
 	@PostMapping("/guardar")
-	public ModelAndView getGuardarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result) {
-	    ModelAndView modelView = new ModelAndView("VISTA DE REGISTROS");
+	public ModelAndView getGuardarReceta(@Valid @ModelAttribute("receta") Receta receta, BindingResult result) {
+	    ModelAndView modelView = new ModelAndView("recetas");
 	    if (result.hasErrors()) {
 	        modelView.setViewName("registros");
-	        modelView.addObject("registro", usuario);
+	        modelView.addObject("receta", receta);
 	        return modelView;
 	    }
 	    // métodos de la capa service
@@ -74,11 +75,11 @@ public class RegistroController {
 	 */
 	
 	@GetMapping("/modificar/{id}")
-	public String getModificarRegistro(Model model, @PathVariable(value = "id") Long id) {
+	public String getModificarReceta(Model model, @PathVariable(value = "id") Long id) {
 		boolean edicion = true;
 		//metodos de la capa service
 		model.addAttribute("edicion", edicion);
-		return "registros";
+		return "FORMULARIO DE INGREDIENTES DE RECETA";
 	}
 	
 	/*
@@ -87,25 +88,25 @@ public class RegistroController {
 	 */
 	
 	@PostMapping("/modificar")
-	public String modificarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result, Model model) {
+	public String modificarReceta(@Valid @ModelAttribute("receta") Receta receta, BindingResult result, Model model) {
 		
 		if (result.hasErrors()) {
 			//metodos de la capa service
 			boolean edicion = true;
 			model.addAttribute("edicion", edicion);
-			return "registros";
+			return "FORMULARIO DE INGREDIENTES DE RECETA";
 			
 		}
 		//metodos de la capa service
-		return "redirect:/registro/listado";
+		return "redirect:/receta/listado";
 	}
 	
 	/*
-	 * Se elimina un registro de acuerdo al id seleccionado
+	 * Se elimina una receta de acuerdo al id seleccionado
 	 */
 	
 	@GetMapping("/eliminar/{id}")
-	public String getEliminarRegistro(Model model, @PathVariable(value = "id") Long id) {
+	public String getEliminarReceta(Model model, @PathVariable(value = "id") Long id) {
 		//metodos de la capa service
 		return "redirect:/registro/listado";
 	}
