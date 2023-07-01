@@ -71,8 +71,9 @@
 							<p class="card-text">preparacion...</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+									<!-- REDIRIGIR A GESTION DE DATOS -->
+									<button type="button" class="btn btn-sm btn-outline-secondary" th:href="@{}">Ver</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary" th:href="@{}">Editar</button>
 								</div>
 							</div>
 						</div>
@@ -82,6 +83,27 @@
 		</div>
 	</div>
 	
+	<!-- HACER OCULTA ESTA SECCION, QUE SOLO SE HABILITE CUANDO PRESIONO VER QUE ES EL BOTON DE ARRIBA -->
+	<!-- MOSTRAR RECETAS -->
+		<div class="row featurette">
+			<div class="col-md-7 order-md-2">
+				<h2 class="featurette-heading">
+				NOMBRE DE RECETA 
+				</h2>
+				<p class="lead">Preparacion</p>
+				<hr class="my-4">
+				<p class="lead">...</p>
+				<p>Ingredientes</p>
+				<hr class="my-4">
+				<p class="lead">...</p>
+			</div>
+			<div class="col-md-5 order-md-1">
+				<img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+					width="500" height="500"
+					role="img" aria-label="Placeholder: 500x500"></img>
+			</div>
+		</div>
+		<hr class="featurette-divider">
 	
 	<!-- Final del contenido de la pagina  -->
 	<!-- CONTENIDO SECUNDARIO -->
