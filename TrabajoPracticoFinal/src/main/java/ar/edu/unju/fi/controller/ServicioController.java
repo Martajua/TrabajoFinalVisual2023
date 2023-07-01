@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 import ar.edu.unju.fi.entity.Usuario;
-import ar.edu.unju.fi.service.IServicioService;
+import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -23,7 +23,7 @@ public class ServicioController {
 	 */
 	
 	@Autowired
-	private IServicioService servicioService;
+	private IIndiceMasaCorporalService imcService;
 	
 	/**
 	 * Metodo que captura una peticion http en la forma de una url devuelve la
