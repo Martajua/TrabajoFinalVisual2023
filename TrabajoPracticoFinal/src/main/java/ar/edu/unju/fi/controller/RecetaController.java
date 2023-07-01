@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Receta;
-import ar.edu.unju.fi.service.IRecetasService;
+import ar.edu.unju.fi.service.IRecetaService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -23,7 +23,7 @@ public class RecetaController {
 	 */
 	
 	@Autowired
-	private IRecetasService recetaService;
+	private IRecetaService recetaService;
 	
 	/**
 	 * Metodo que captura una peticion http en la forma de una url devuelve la
@@ -61,6 +61,7 @@ public class RecetaController {
 	    ModelAndView modelView = new ModelAndView("recetas");
 	    if (result.hasErrors()) {
 	        modelView.setViewName("registros");
+	      //metodos de la capa service
 	        modelView.addObject("receta", receta);
 	        return modelView;
 	    }
