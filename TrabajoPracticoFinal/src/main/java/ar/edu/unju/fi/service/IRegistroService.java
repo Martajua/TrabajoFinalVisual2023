@@ -1,5 +1,5 @@
 package ar.edu.unju.fi.service;
 
-public class IRegistroService {
+public interface IRegistroService {
 
 }
