@@ -1,16 +1,19 @@
 package ar.edu.unju.fi.service;
 
-import java.util.List;
-
 import ar.edu.unju.fi.entity.Usuario;
+
+import java.util.List;
 
 public interface IRegistroService {
 
+	//region Methods
 	public void addUsuario(Usuario usuario);
 
 	public List<Usuario> getAllUsuarios();
 
-	public void deleteUsuarioById(Usuario usuario);
+	public Usuario findUsuarioById(int id);
 
-	public Usuario findUsuarioById(Integer id);
+	public void deleteUsuarioById(Usuario usuario);
+	//endregion
+
 }

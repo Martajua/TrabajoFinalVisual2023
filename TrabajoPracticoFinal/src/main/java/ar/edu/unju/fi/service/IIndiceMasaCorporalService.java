@@ -1,8 +1,9 @@
 package ar.edu.unju.fi.service;
 
+import ar.edu.unju.fi.entity.IndiceMasaCorporal;
+
 import java.util.List;
 
-import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 public interface IIndiceMasaCorporalService {
 
 	public void addTestimonio(IndiceMasaCorporal masaCorporal);
@@ -12,4 +13,5 @@ public interface IIndiceMasaCorporalService {
 	public void deleteImcById(IndiceMasaCorporal masaCorporal);
 
 	public IndiceMasaCorporal findIndiceMasaCorporalById(Integer id);
+
 }

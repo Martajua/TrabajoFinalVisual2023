@@ -1,15 +1,14 @@
 package ar.edu.unju.fi.service.imp;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import ar.edu.unju.fi.entity.Testimonio;
 import ar.edu.unju.fi.repository.ITestimonioRepository;
 import ar.edu.unju.fi.service.ITestimonioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+@Service("testimonioServiceImp")
 public class TestimonioServiceImp implements ITestimonioService {
 
 	@Autowired
@@ -20,7 +19,6 @@ public class TestimonioServiceImp implements ITestimonioService {
 
 	@Override
 	public void addTestimonio(Testimonio testimonio) {
-
 		testimonioRepository.save(testimonio);
 	}
 
@@ -34,7 +32,6 @@ public class TestimonioServiceImp implements ITestimonioService {
 	public void deleteTestimonioById(Testimonio testimonio) {
 		testimonio.setEstado(false);
 		testimonioRepository.save(testimonio);
-
 	}
 
 	@Override

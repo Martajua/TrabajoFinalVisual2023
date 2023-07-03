@@ -1,16 +1,15 @@
 package ar.edu.unju.fi.service.imp;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 import ar.edu.unju.fi.repository.IIndiceMasaCorporalRepository;
 import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service
-public class IindiceMasaCorporalServiceImp implements IIndiceMasaCorporalService {
+import java.util.List;
+
+@Service("indiceMasaCorporalServiceImp")
+public class IndiceMasaCorporalServiceImp implements IIndiceMasaCorporalService {
 
 	@Autowired
 	private IndiceMasaCorporal indiceMasaCorporal;
@@ -19,10 +18,8 @@ public class IindiceMasaCorporalServiceImp implements IIndiceMasaCorporalService
 	private IIndiceMasaCorporalRepository indiceMasaCorporalRepository;
 	
 	@Override
-	public void addTestimonio(IndiceMasaCorporal masaCorporal) {
-	
-		indiceMasaCorporalRepository.save(masaCorporal);
-		
+	public void addTestimonio(IndiceMasaCorporal indiceMasaCorporal) {
+		indiceMasaCorporalRepository.save(indiceMasaCorporal);
 	}
 
 	@Override
@@ -32,9 +29,9 @@ public class IindiceMasaCorporalServiceImp implements IIndiceMasaCorporalService
 	}
 
 	@Override
-	public void deleteImcById(IndiceMasaCorporal masaCorporal) {
-		masaCorporal.setEstado(false);
-		indiceMasaCorporalRepository.save(masaCorporal);
+	public void deleteImcById(IndiceMasaCorporal indiceMasaCorporal) {
+		indiceMasaCorporal.setEstado(false);
+		indiceMasaCorporalRepository.save(indiceMasaCorporal);
 	}
 
 	@Override

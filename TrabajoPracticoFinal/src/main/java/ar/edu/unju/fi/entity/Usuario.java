@@ -1,17 +1,42 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Component
-public class Usuario {
+@Entity
+@Table(
+        name = "usuarios"
+)
+public class Usuario implements Serializable {
+
+    //region Static Objects
+    private static final Long serialVersionUID = 1L;
+    //endregion
 
     //region Attributes
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    @Column(
+            name = "usu_id"
+    )
     private Integer id;
+
+    @Column(
+            name = "usu_estado"
+    )
     private Boolean estado;
+
+    @Column(
+            name = "usu_nombre"
+    )
     @NotBlank(
             message = "Introduce un nombre"
     )
@@ -25,6 +50,10 @@ public class Usuario {
             message = "Solo puede contener letras"
     )
     private String nombre;
+
+    @Column(
+            name = "usu_apellido"
+    )
     @NotBlank(
             message = "Introduce un apellido"
     )
@@ -39,13 +68,21 @@ public class Usuario {
     )
     private String apellido;
 
+    @Column(
+            name = "usu_email"
+    )
     @Email(
-            message = "Email no es correcto", regexp = ".*"
+            message = "Email no es correcto",
+            regexp = ".*"
     )
     @NotBlank(
             message = "Debes introducir un email"
     )
     private String email;
+
+    @Column(
+            name = "usu_fecha_nacimiento"
+    )
     @DateTimeFormat(
             pattern = "yyyy-MM-dd"
     )
@@ -56,6 +93,10 @@ public class Usuario {
             message = "Debes introducir una fecha"
     )
     private LocalDate fechaNacimiento;
+
+    @Column(
+            name = "usu_telefono"
+    )
     @NotBlank(
             message = "Debes introducir un número de teléfono"
     )
@@ -63,6 +104,10 @@ public class Usuario {
             regexp = "0388-[0-9]{3}-[0-9]{4}"
     )
     private String telefono;
+
+    @Column(
+            name = "usu_sexo"
+    )
     @NotBlank(
             message = "Debes introducir tu sexo"
     )
@@ -71,7 +116,13 @@ public class Usuario {
             flags = Pattern.Flag.CASE_INSENSITIVE
     )
     private String sexo;
-    @NotEmpty(message = "Debes introducir tu estatura")
+
+    @Column(
+            name = "usu_estatura"
+    )
+    @NotEmpty(
+            message = "Debes introducir tu estatura"
+    )
     @Min(0)
     private Float estatura;
     //endregion

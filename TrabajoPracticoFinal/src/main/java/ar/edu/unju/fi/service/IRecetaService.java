@@ -1,16 +1,19 @@
 package ar.edu.unju.fi.service;
 
-import java.util.List;
-
 import ar.edu.unju.fi.entity.Receta;
+
+import java.util.List;
 
 public interface IRecetaService {
 
+	//region Methods
 	public void addReceta(Receta receta);
 
 	public List<Receta> getAllRecetas();
 
-	public void deleteRecetaById(Receta receta);
+	public Receta findRecetaById(int id);
 
-	public Receta findRecetaById(Integer id);
+	public void deleteRecetaById(Receta receta);
+	//endregion Methods
+
 }

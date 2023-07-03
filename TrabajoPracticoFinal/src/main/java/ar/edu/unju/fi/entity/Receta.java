@@ -1,17 +1,43 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Receta {
+@Component
+@Entity
+@Table(
+        name = "recetas"
+)
+public class Receta implements Serializable {
+
+    //region Static Objects
+    private static final Long serialVersionUID = 1L;
+    //endregion
 
     //region Attributes
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    @Column(
+            name = "rec_id"
+    )
     private Integer id;
+
+    @Column(
+            name = "rec_estado"
+    )
     private Boolean estado;
+
+    @Column(
+            name = "rec_nombre"
+    )
     @NotBlank(
             message = "Introduce un nombre"
     )
@@ -25,18 +51,29 @@ public class Receta {
             message = "Solo puede contener letras"
     )
     private String nombre;
+
+    @Column(
+            name = "rec_categoria"
+    )
     @NotBlank(
-            message = "Debes introducir una categoria"
+            message = "Debes introducir una categoría"
     )
     @Pattern(
             regexp = "carnes|bebidas|dulces|ensaladas|legumbres y cereales|pescados|pan|sopas y cremas",
             flags = Pattern.Flag.CASE_INSENSITIVE
     )
     private String categoria;
-    @NotNull(
-            message = "Debes seleccionar un usuario"
+
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
+//    @NotNull(message = "Debes seleccionar los ingredientes ")
     private List<Ingrediente> ingredientes;
+
+    @Column(
+            name = "rec_preparacion"
+    )
     @NotBlank(
             message = "Introduce un nombre"
     )
@@ -50,6 +87,10 @@ public class Receta {
             message = "Solo no puede contener caracteres especiales"
     )
     private String preparacion;
+
+    @Column(
+            name = "rec_imagen"
+    )
     @NotBlank(
             message = "Introduce una dirección URL"
     )
@@ -63,6 +104,7 @@ public class Receta {
 
     //region Constructors
     public Receta() {
+        this.estado = true;
     }
 
     public Receta(

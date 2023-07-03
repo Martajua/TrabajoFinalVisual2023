@@ -1,16 +1,19 @@
 package ar.edu.unju.fi.service;
 
-import java.util.List;
-
 import ar.edu.unju.fi.entity.Ingrediente;
 
+import java.util.List;
 
 public interface IIngredienteService {
+
+	//region Methods
 	public void addIngrediente(Ingrediente ingrediente);
 
 	public List<Ingrediente> getAllIngredientes();
 
-	public void deleteIngredienteById(Ingrediente ingrediente);
+	public Ingrediente findIngredienteById(int id);
 
-	public Ingrediente findTestimonioById(Integer id);
+	public void deleteIngredienteByIdentifier(Ingrediente ingrediente);
+	//endregion
+
 }

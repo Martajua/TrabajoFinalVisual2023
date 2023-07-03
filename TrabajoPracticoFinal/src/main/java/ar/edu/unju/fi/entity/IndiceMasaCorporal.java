@@ -1,37 +1,46 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
-public class IndiceMasaCorporal {
+@Component
+@Entity
+@Table(name = "indices_de_masa_corporal")
+public class IndiceMasaCorporal implements Serializable {
+
+    //region Static Objects
+    private static final Long serialVersionUID = 1L;
+    //endregion
 
     //region Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ind_id")
     private Integer id;
+
+    @Column(name = "ind_estado")
     private Boolean estado;
-    @DateTimeFormat(
-            pattern = "yyyy-MM-dd"
-    )
-    @NotNull(
-            message = "Debes introducir una fecha"
-    )
-    @Past(
-            message = "La fecha ingresada es incorrecta"
-    )
+
+    @Column(name = "ind_usuario")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Debes introducir una fecha")
+    @PastOrPresent(message = "La fecha ingresada es incorrecta")
     private LocalDate fechaImc;
-    @NotNull(
-            message = "Debes seleccionar un usuario"
-    )
+
+    @NotNull(message = "Debes seleccionar un usuario")
     private Usuario usuario;
     //endregion
 
     //region Constructors
-
     public IndiceMasaCorporal() {
     }
 

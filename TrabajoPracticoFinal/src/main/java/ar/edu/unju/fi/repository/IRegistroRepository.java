@@ -1,14 +1,14 @@
 package ar.edu.unju.fi.repository;
 
-import ar.edu.unju.fi.entity.Receta;
+import ar.edu.unju.fi.entity.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface IRecetaRepository extends CrudRepository<Receta, Integer> {
+public interface IRegistroRepository extends CrudRepository<Usuario, Integer> {
 
-    public List<Receta> findByEstado(boolean estado);
+	public List<Usuario> findByEstado(boolean estado);
 
 }
