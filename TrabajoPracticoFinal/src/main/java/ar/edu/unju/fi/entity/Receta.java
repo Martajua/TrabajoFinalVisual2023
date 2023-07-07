@@ -1,150 +1,141 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+@Component
+@Entity
+@Table(name = "recetas")
 public class Receta {
 
-    //region Attributes
-    private Integer id;
-    private Boolean estado;
-    @NotBlank(
-            message = "Introduce un nombre"
-    )
-    @Size(
-            min = 3,
-            max = 30,
-            message = "El nombre solo puede contener entre 3 y 30 caracteres"
-    )
-    @Pattern(
-            regexp = "[a-z A-Z]+",
-            message = "Solo puede contener letras"
-    )
-    private String nombre;
-    @NotBlank(
-            message = "Debes introducir una categoria"
-    )
-    @Pattern(
-            regexp = "carnes|bebidas|dulces|ensaladas|legumbres y cereales|pescados|pan|sopas y cremas",
-            flags = Pattern.Flag.CASE_INSENSITIVE
-    )
-    private String categoria;
-    @NotNull(
-            message = "Debes seleccionar un usuario"
-    )
-    private List<Ingrediente> ingredientes;
-    @NotBlank(
-            message = "Introduce un nombre"
-    )
-    @Size(
-            min = 3,
-            max = 30,
-            message = "La preparación solo puede contener entre 3 y 30 caracteres"
-    )
-    @Pattern(
-            regexp = "[a-z A-Z 0-9]+",
-            message = "Solo no puede contener caracteres especiales"
-    )
-    private String preparacion;
-    @NotBlank(
-            message = "Introduce una dirección URL"
-    )
-    @Size(
-            min = 10,
-            max = 30,
-            message = "La dirección URL de la imagen solo puede contener entre 10 y 30 caracteres"
-    )
-    private String imagen;
-    //endregion
+	// region Attributes
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="receta_id")
+	private Integer id;
+	
+	@Column(name="receta_estado")
+	private Boolean estado;
+	
+	@Column(name="receta_nombre")
+	@NotEmpty(message = "El nombre no debe estar vacío")
+	@Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres")
+	/* Con el PAttern acepta nombres con tilde */
+	@Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios")
+	private String nombre;
+	
+	@Column(name="receta_categoria")
+	@NotBlank(message = "Debes seleccionar una categoria")
+	//@Pattern(regexp = "carnes|bebidas|dulces|ensaladas|legumbres y cereales|pescados|pan|sopas y cremas", flags = Pattern.Flag.CASE_INSENSITIVE)
+	private String categoria;
+	
+	@Column(name="receta_ingrediente")
+	@NotNull(message = "Debes seleccionar un usuario")
+	private List<Ingrediente> ingredientes;
+	
+	@Column(name="receta_preparacion")
+	@NotBlank(message = "Introduce un nombre")
+	@Size(min = 3, max = 30, message = "La preparación solo puede contener entre 3 y 30 caracteres")
+	@Pattern(regexp = "[a-z A-Z 0-9]+", message = "Solo no puede contener caracteres especiales")
+	private String preparacion;
+	
+	@Column(name="receta_imagen")
+	@NotBlank(message = "Introduce una dirección URL")
+	@Size(min = 10, max = 100, message = "La dirección URL de la imagen solo puede contener entre 10 y 30 caracteres")
+	private String imagen;
+	// endregion
 
-    //region Constructors
-    public Receta() {
-    }
+	// region Constructors
+	public Receta() {
+	}
 
-    public Receta(
-            Integer id,
-            Boolean estado,
-            String nombre,
-            String categoria,
-            List<Ingrediente> ingredientes,
-            String preparacion,
-            String imagen) {
+	public Receta(Integer id, Boolean estado, String nombre, String categoria, List<Ingrediente> ingredientes,
+			String preparacion, String imagen) {
 
-        this.id = id;
-        this.estado = estado;
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.ingredientes = ingredientes;
-        this.preparacion = preparacion;
-        this.imagen = imagen;
+		this.id = id;
+		this.estado = estado;
+		this.nombre = nombre;
+		this.categoria = categoria;
+		this.ingredientes = ingredientes;
+		this.preparacion = preparacion;
+		this.imagen = imagen;
 
-    }
-    //endregion
+	}
+	// endregion
 
-    //region Getters and Setters
-    public Integer getId() {
-        return id;
-    }
+	// region Getters and Setters
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Boolean getEstado() {
-        return estado;
-    }
+	public Boolean getEstado() {
+		return estado;
+	}
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getCategoria() {
-        return categoria;
-    }
+	public String getCategoria() {
+		return categoria;
+	}
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
 
-    public void setIngredientes(List<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
-    }
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
 
-    public String getPreparacion() {
-        return preparacion;
-    }
+	public String getPreparacion() {
+		return preparacion;
+	}
 
-    public void setPreparacion(String preparacion) {
-        this.preparacion = preparacion;
-    }
+	public void setPreparacion(String preparacion) {
+		this.preparacion = preparacion;
+	}
 
-    public String getImagen() {
-        return imagen;
-    }
+	public String getImagen() {
+		return imagen;
+	}
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 
-    //endregion
+	// endregion
 
-    //region Methods
-    //endregion
+	// region Methods
+	// endregion
 
 }
