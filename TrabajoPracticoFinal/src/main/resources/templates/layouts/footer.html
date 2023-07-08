@@ -1,61 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
-	    
-	    
-	</head>
-	<body>
-	<div class="container">
-		<footer th:fragment="footer"
-			class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-			<div class="col mb-3">
-				<a>
-				<!-- IMAGEN -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+
+
+</head>
+<body>
+	<!-- Footer -->
+	<footer class="text-center text-lg-start bg-light text-muted">
+		<!-- Section: Social media -->
+		<section
+			class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+			<!-- Left -->
+			<div class="me-5 d-none d-lg-block">
+				<span>Conéctate con nosotros en las redes sociales:</span>
+			</div>
+			<!-- Left -->
+
+			<!-- Right -->
+			<div>
+				<a href="" class="me-4 text-reset"> <i class="fab fa-facebook-f"></i>
+				</a> <a href="" class="me-4 text-reset"> <i class="fab fa-twitter"></i>
+				</a> <a href="" class="me-4 text-reset"> <i class="fab fa-google"></i>
+				</a> <a href="" class="me-4 text-reset"> <i class="fab fa-instagram"></i>
+				</a> <a href="" class="me-4 text-reset"> <i class="fab fa-linkedin"></i>
+				</a> <a href="" class="me-4 text-reset"> <i class="fab fa-github"></i>
 				</a>
-				<p class="text-muted">&copy; 2023</p>
 			</div>
+			<!-- Right -->
+		</section>
+		<!-- Section: Social media -->
 
-			<div class="col mb-3"></div>
+		<!-- Section: Links  -->
+		<section class="">
+			<div class="container text-center text-md-start mt-5">
+				<!-- Grid row -->
+				<div class="row mt-3">
+					<!-- Grid column -->
+					<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+						<!-- Content -->
+						<h6 class="text-uppercase fw-bold mb-4">
+							<i class="fas fa-gem me-3"></i>Alimentación saludable Tocobi
+						</h6>
+						<p>Brindar a la comunidad una nueva forma profesional, sana y responsable para adelgazar,
+						de acuerdo con los rasgos y hábitat de cada persona utilizando Internet como medio.</p>
+					</div>
+					<!-- Grid column -->
 
-			<div class="col mb-3">
-				<h5>Servicios</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Calcular IMC</a></li>
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Peso Ideal</a></li>
-				</ul>
+					<!-- Grid column -->
+					<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+						<!-- Links -->
+						<h6 class="text-uppercase fw-bold mb-4">Productos</h6>
+						<p>
+							<a href="#!" class="text-reset">Recetas</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Testimonios</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Contacto</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Laravel</a>
+						</p>
+					</div>
+					<!-- Grid column -->
+
+					<!-- Grid column -->
+					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+						<!-- Links -->
+						<h6 class="text-uppercase fw-bold mb-4">Servicios</h6>
+						<p>
+							<a href="#!" class="text-reset">Calcular IMC</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Peso Ideal</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Otros</a>
+						</p>
+						<p>
+							<a href="#!" class="text-reset">Ayuda</a>
+						</p>
+					</div>
+					<!-- Grid column -->
+
+					<!-- Grid column -->
+					<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+						<!-- Links -->
+						<h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+						<p>
+							<i class="fas fa-home me-3"></i>Italo Palanca 10, Y4600 Jujuy
+						</p>
+						<p>
+							<i class="fas fa-envelope me-3"></i> dietastocobi@yopmail.com
+						</p>
+						<p>
+							<i class="fas fa-phone me-3"></i> + 01 234 567 88
+						</p>
+						<p>
+							<i class="fas fa-print me-3"></i> + 01 234 567 89
+						</p>
+					</div>
+					<!-- Grid column -->
+				</div>
+				<!-- Grid row -->
 			</div>
+		</section>
+		<!-- Section: Links  -->
 
-			<div class="col mb-3">
-				<h5>Aprender</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Recetas</a></li>
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Testimonios</a></li>
-				</ul>
-			</div>
-
-			<div class="col mb-3">
-				<h5>Acceso y Contacto</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Registrate</a></li>
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Iniciar Sesión</a></li>
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Contacto</a></li>
-					<li class="nav-item mb-2"><a th:href="@{}"
-						class="nav-link p-0 text-muted">Gestión de Datos</a></li>
-				</ul>
-			</div>
-		</footer>
-	</div>
-	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	</body>
+		<!-- Copyright -->
+		<div class="text-center p-4"
+			style="background-color: rgba(0, 0, 0, 0.05);">
+			© 2023 Copyright: <a class="text-reset fw-bold"
+				href="https://mdbootstrap.com/">Trabajo Final Programacion Visual</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
 </html>
