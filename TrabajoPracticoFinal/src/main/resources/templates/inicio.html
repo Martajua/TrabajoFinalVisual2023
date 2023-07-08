@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Inicio</title>
-	<!-- imagen que podemos poner fijarse -->
-	<link th:rel="shortcut icon" th:href="@{../static/images/PONERIMAGEN.JPG}">
-	<!-- FALTA ESTO -->
-	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-	<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
-	</head>
-	<body>
-	<!-- ENCABEZADO -->
-		<header th:replace="~{layouts/header :: header}"></header>
-		<div class="b-example-divider"></div>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Inicio</title>
+<!-- FALTA ESTO -->
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container">
+<!-- ENCABEZADO -->
+	<header th:replace="~{layouts/header :: header}"></header>
+	<div class="b-example-divider"></div>
 	<!-- BARRA DE NAVEGACION -->
-		<nav th:replace="~{layouts/nav :: nav} "></nav>
-		<div class="b-example-divider"></div>
+	<nav th:replace="~{layouts/nav :: nav} "></nav>
+	<div class="b-example-divider"></div>
 	<!-- CONTENIDO PRIMARIO -->
-		<!-- Inicio del contenido de la pagina -->
-	<div
-		class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+	<!-- Inicio del contenido de la pagina -->
+	<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
 		<div class="col-md-5 p-lg-5 mx-auto my-5">
 			<h1 class="display-4 fw-normal">SALUD Y BIENESTAR</h1>
 			<p class="lead fw-normal">"El cuidado de tu salud y bienestar es
@@ -35,7 +35,7 @@
 				saludables y prácticas conscientes, puedes mejorar tu calidad de
 				vida y sentirte mejor equipado para enfrentar los desafíos diarios
 				con confianza y resiliencia."</p>
-			<a class="btn btn-outline-secondary" th:href="@{}">Registrate</a>
+			<a class="btn btn-outline-secondary" th:href="@{/index}">Registrate</a>
 		</div>
 		<div class="product-device shadow-sm d-none d-md-block"></div>
 		<div
@@ -46,8 +46,10 @@
 			class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
 			<div class="my-3 py-3">
 				<h2 class="display-5">SERVICIOS</h2>
-				<p class="lead">Conoce tu estado de salud y alcanza tu peso ideal con nuestros servicios.</p>
-				<a class="btn btn-outline-secondary" th:href="@{}">Ir a Servicios</a>
+				<p class="lead">Conoce tu estado de salud y alcanza tu peso
+					ideal con nuestros servicios.</p>
+				<a class="btn btn-outline-secondary" th:href="@{/index}">Ir a
+					Servicios</a>
 			</div>
 			<div class="bg-light shadow-sm mx-auto"
 				style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
@@ -56,8 +58,10 @@
 			class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
 			<div class="my-3 p-3">
 				<h2 class="display-5">RECETAS</h2>
-				<p class="lead">Deliciosas opciones para una alimentación saludable y equilibrada.</p>
-				<a class="btn btn-outline-secondary" th:href="@{}">Ir a Recetas</a>
+				<p class="lead">Deliciosas opciones para una alimentación
+					saludable y equilibrada.</p>
+				<a class="btn btn-outline-secondary" th:href="@{/index}">Ir a
+					Recetas</a>
 			</div>
 			<div class="bg-dark shadow-sm mx-auto"
 				style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
@@ -68,8 +72,11 @@
 			class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
 			<div class="my-3 p-3">
 				<h2 class="display-5">TESTIMONIOS</h2>
-				<p class="lead">Descubre cómo nuestros servicios han transformado vidas y mejorado la salud y el bienestar de nuestros clientes.</p>
-				<a class="btn btn-outline-secondary" th:href="@{}">Ir a Testimonios</a>
+				<p class="lead">Descubre cómo nuestros servicios han
+					transformado vidas y mejorado la salud y el bienestar de nuestros
+					clientes.</p>
+				<a class="btn btn-outline-secondary" th:href="@{/index}">Ir a
+					Testimonios</a>
 			</div>
 			<div class="bg-dark shadow-sm mx-auto"
 				style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
@@ -78,8 +85,11 @@
 			class="bg-primary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
 			<div class="my-3 py-3">
 				<h2 class="display-5">CONTACTANOS</h2>
-				<p class="lead">Estamos aquí para ayudarte: contáctanos para obtener más información sobre nuestros servicios de salud y bienestar.</p>
-				<a class="btn btn-outline-secondary" th:href="@{}">Ir a Contacto</a>
+				<p class="lead">Estamos aquí para ayudarte: contáctanos para
+					obtener más información sobre nuestros servicios de salud y
+					bienestar.</p>
+				<a class="btn btn-outline-secondary" th:href="@{/index}">Ir a
+					Contacto</a>
 			</div>
 			<div class="bg-light shadow-sm mx-auto"
 				style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
@@ -87,11 +97,15 @@
 	</div>
 	<div class="b-example-divider"></div>
 	<!-- Final del contenido de la pagina  -->
-		<!-- CONTENIDO SECUNDARIO -->
-		<aside th:replace="~{layouts/aside :: aside}"></aside>
-		<div class="b-example-divider"></div>
-		<!-- PIE DE PAGINA -->
-		<footer th:replace="~{layouts/footer :: footer}"></footer>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	</body>
+	<!-- CONTENIDO SECUNDARIO -->
+	<aside></aside>
+	<div class="b-example-divider"></div>
+	<!-- PIE DE PAGINA -->
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+</div>
+
+	
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>
