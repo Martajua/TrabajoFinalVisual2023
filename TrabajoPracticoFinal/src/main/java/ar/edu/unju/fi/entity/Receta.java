@@ -62,7 +62,9 @@ public class Receta {
 	@Column(name = "receta_imagen")
 	@NotBlank(message = "Introduce una dirección URL")
 	@Size(min = 10, max = 100, message = "La dirección URL de la imagen solo puede contener entre 10 y 100 caracteres")
-	private String imagen; // endregion
+	private String imagen; 
+	
+	// endregion
 
 	// region Constructors 
 	

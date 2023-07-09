@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title
+	th:text="${edicion}? 'Modificar datos de Ingrediente' : 'Nuevo Ingrediente'">Registrate</title>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+	<!-- ENCABEZADO -->
+	<header th:replace="~{layouts/header :: header}"></header>
+	<div class="b-example-divider"></div>
+	<div class="container">
+		<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+		<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		<div class="row">
+			<div class="col-md-12 text-justify p-2">
+				<form
+					th:action="${edicion}?@{/ingrediente/modificar}:@{/ingrediente/guardar}"
+					class="form-signin text-center" th:object="${ingrediente}"
+					method="post">
+					<input type="hidden" th:field="*{id}"> 
+					<input type="hidden" th:field="*{estado}">
+					<h1 class="h3 mb-3 fw-normal"
+						th:text="${edicion} ? 'Modificar Ingrediente' : 'Cargar Ingrediente'">REGISTRATE</h1>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="ingrediente"
+							placeholder="Ingrese Ingrediente" th:field="*{nombre}"> <label
+							for="floatingInput">Nombre</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+							th:errors="*{nombre}"></div>
+					</div>
+
+					<input class="w-100 btn btn-lg btn-outline-secondary" type="submit"
+						th:value="${edicion}?'Modificar':'Guardar'">
+
+				</form>
+
+				<div th:if="${edicion}">
+					<a th:href="@{/ingrediente/listado}" class="w-100 btn btn-outline-success">Regresar</a>
+				</div>
+
+			</div>
+		</div>
+		<!-- Final del contenido de la pagina  -->
+		<!-- CONTENIDO SECUNDARIO -->
+		<aside></aside>
+		<div class="b-example-divider"></div>
+		<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
