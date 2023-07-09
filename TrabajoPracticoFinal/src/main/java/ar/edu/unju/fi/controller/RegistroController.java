@@ -12,8 +12,10 @@ import ar.edu.unju.fi.service.IRegistroService;
 import jakarta.validation.Valid;
 
 @Controller
+
 @RequestMapping("/registro")
 public class RegistroController {
+
 	/*
 	 * la anotación @RequestMapping("/registro") indica que todas las solicitudes
 	 * que comiencen con "/registro" serán manejadas por los métodos de este
@@ -32,82 +34,101 @@ public class RegistroController {
 	 */
 	@GetMapping("/listado")
 	public String getListaRegistros(Model model) {
-		//metodos de la capa service
-		return "VISTA DE REGISTROS";
+		model.addAttribute("registros",registroService.getAllUsuarios());
+		return "registros";
 	}
-	
+
 	/*
 	 * Carga la vista del formulario. Cuando la variable edición sea falsa se va a
 	 * cargar el formulario para realizar un alta
-	 * 
 	 */
-	
+
 	@GetMapping("/nuevo")
 	public String getNuevoRegistro(Model model) {
 		boolean edicion = false;
-		//metodos de la capa service
+		model.addAttribute("registro", registroService.getUsuario());
 		model.addAttribute("edicion", edicion);
-		return "registros";
+		return "form_registros";
 	}
-	
+
 	/*
 	 * Recibe los datos enviados por el formulario y realiza el alta de un registro
-	 * 
 	 */
+
+	/*
+	 * @PostMapping("/guardar") public ModelAndView
+	 * getGuardarRegistro(@Valid @ModelAttribute("registro") Usuario usuario,
+	 * BindingResult result) { ModelAndView modelView = new
+	 * ModelAndView("registros"); if (result.hasErrors()) {
+	 * modelView.setViewName("form_registros"); modelView.addObject("registro",
+	 * usuario); return modelView; } usuario.setEstado(true);
+	 * registroService.addUsuario(usuario); modelView.addObject("registros",
+	 * registroService.getAllUsuarios()); return modelView; }
+	 */
+	
 	
 	@PostMapping("/guardar")
 	public ModelAndView getGuardarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result) {
-	    ModelAndView modelView = new ModelAndView("VISTA DE REGISTROS");
+	    ModelAndView modelView = new ModelAndView("form_registros");
 	    if (result.hasErrors()) {
-	        modelView.setViewName("registros");
-	      //metodos de la capa service
 	        modelView.addObject("registro", usuario);
 	        return modelView;
 	    }
-	    // métodos de la capa service
+	    usuario.setEstado(true);
+	    usuario.setAdmin(false);
+	    registroService.addUsuario(usuario);
+
+	    // Obtener el ID del usuario guardado
+	    Long userId = usuario.getId();
+
+	    // Pasar el ID del usuario al modelo
+	    modelView.addObject("userId", userId);
+
 	    return modelView;
 	}
 	
+	
+	
+	
+
 	/*
 	 * Carga la vista del formulario. Cuando la variable edición sea "verdadera" se
 	 * carga en el formulario los datos para modificarlos de acuerdo al ID
 	 * establecido
 	 */
-	
+
 	@GetMapping("/modificar/{id}")
 	public String getModificarRegistro(Model model, @PathVariable(value = "id") Long id) {
 		boolean edicion = true;
-		//metodos de la capa service
+		Usuario usuarioEncontrado= registroService.findUsuarioById(id);
+		// metodos de la capa service
+		model.addAttribute("registro",usuarioEncontrado);
 		model.addAttribute("edicion", edicion);
-		return "registros";
+		return "form_registros";
 	}
-	
-	/*
-	 * Aqui se reciben los datos enviados por el formularios a modificar.
-	 * 
-	 */
-	
+
+	/* Aqui se reciben los datos enviados por el formularios a modificar y se modifican los datos
+	 * del usuario existente. */
+
 	@PostMapping("/modificar")
-	public String modificarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result, Model model) {
-		
+	public String modificarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result,
+			Model model) {
 		if (result.hasErrors()) {
-			//metodos de la capa service
+			// métodos de la capa service
 			boolean edicion = true;
 			model.addAttribute("edicion", edicion);
-			return "registros";
-			
+			return "form_registros";
 		}
-		//metodos de la capa service
+		registroService.modificar(usuario);
 		return "redirect:/registro/listado";
 	}
-	
-	/*
-	 * Se elimina un registro de acuerdo al id seleccionado
-	 */
-	
+
+	/* Se elimina un registro de acuerdo al id seleccionado */
+
 	@GetMapping("/eliminar/{id}")
 	public String getEliminarRegistro(Model model, @PathVariable(value = "id") Long id) {
-		//metodos de la capa service
+		Usuario usuarioEncontrado = registroService.findUsuarioById(id);
+		registroService.deleteUsuarioById(usuarioEncontrado);
 		return "redirect:/registro/listado";
 	}
 }

@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title
-	th:text="${edicion}? 'Modificar datos de Usuario':'Nuevo Usuario'">Registrate</title>
+<title th:text="${edicion != null && edicion}? 'Modificar datos de Usuario' : 'Nuevo Usuario'">Registrate</title>
 <link th:rel="stylesheet"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 <link th:rel="stylesheet" th:href="@{/css/estilos.css}">
@@ -25,32 +24,33 @@
 					th:action="${edicion}?@{/registro/modificar}:@{/registro/guardar}"
 					class="form-signin text-center" th:object="${registro}"
 					method="post">
-					<input type="hidden" th:field="*{id}"> <input type="hidden"
-						th:field="*{estado}">
-					<h1 class="h3 mb-3 fw-normal">REGISTRATE</h1>
+					<input type="hidden" th:field="*{id}">
+					<input type="hidden" th:field="*{estado}">
+					<h1 class="h3 mb-3 fw-normal"
+						th:text="${edicion} ? 'Modificar Usuario' : 'Registrate Loco'">REGISTRATE</h1>
 					<div class="form-floating mb-3">
-						<input type="text" class="form-control" id="floatingInput"
-							placeholder="Ana Laura" th:field="*{nombre}"> <label
+						<input type="text" class="form-control" id="nombre"
+							placeholder="Ingrese su nombre" th:field="*{nombre}"> <label
 							for="floatingInput">Nombre</label>
 						<div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
 							th:errors="*{nombre}"></div>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="text" class="form-control" id="floatingInput"
+						<input type="text" class="form-control" id="apellido"
 							placeholder="Torres" th:field="*{apellido}"> <label
 							for="floatingInput">Apellido</label>
 						<div class="text-danger" th:if="${#fields.hasErrors('apellido')}"
 							th:errors="*{apellido}"></div>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="email" class="form-control" id="floatingInput"
+						<input type="email" class="form-control" id="email"
 							placeholder="usuario@ejemplo.com" th:field="*{email}"> <label
 							for="floatingInput">Correo electrónico</label>
 						<div class="text-danger" th:if="${#fields.hasErrors('email')}"
 							th:errors="*{email}"></div>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="date" class="form-control" id="floatingInput"
+						<input type="date" class="form-control" id="fecha"
 							placeholder="18/09/1996" th:field="*{fechaNacimiento}"> <label
 							for="floatingInput">Fecha de Nacimiento</label>
 						<div class="text-danger"
@@ -58,15 +58,15 @@
 							th:errors="*{fechaNacimiento}"></div>
 					</div>
 					<div class="form-floating mb-3">
-						<input type="text" class="form-control" id="floatingInput"
+						<input type="text" class="form-control" id="telefono"
 							placeholder="388-550-5899" th:field="*{telefono}"> <label
 							for="floatingInput">Teléfono</label>
 						<div class="text-danger" th:if="${#fields.hasErrors('telefono')}"
 							th:errors="*{telefono}"></div>
 					</div>
 					<div class="form-floating mb-3">
-						<label for="floatingInput"></label> <select id="floatingInput"
-							name="sexo" class="form-select" th:field="*{sexo}">
+						<label for="floatingInput"></label> <select id="sexo" name="sexo"
+							class="form-select" th:field="*{sexo}">
 							<option value="" selected>Seleccione una opcion</option>
 							<option value="Femenino">Femenino</option>
 							<option value="Masculino">Masculino</option>
@@ -76,18 +76,53 @@
 					</div>
 
 					<div class="form-floating mb-3">
-						<input type="number" class="form-control" id="floatingInput"
-							placeholder="Estatura" th:field="*{estatura}"> <label
-							for="floatingInput">Estatura</label>
+						<input type="text" class="form-control" id="estatura"
+							placeholder="Estatura" th:field="*{estatura}"
+							pattern="\d+(\.\d+)?"> <label for="estatura">Estatura</label>
 						<div class="text-danger" th:if="${#fields.hasErrors('estatura')}"
 							th:errors="*{estatura}"></div>
 					</div>
+
+
+					<div class="form-floating mb-3">
+					    <label for="floatingInput"></label> 
+					    <select id="admin" name="admin" class="form-select" th:field="*{admin}" th:if="${edicion != null && edicion}">
+					        <option value="" selected>Seleccione una opción</option>
+					        <option value="true">Sí</option>
+					        <option value="false">No</option>
+					    </select> 
+					    <label for="floatingSelect">Administrador</label>
+					    <div class="text-danger" th:if="${#fields.hasErrors('admin')}" th:errors="*{admin}"></div>
+					    <input type="hidden" th:hidden="${edicion == null || !edicion}" th:field="*{admin}">
+					</div>
+
+
 					<input class="w-100 btn btn-lg btn-outline-secondary" type="submit"
-						th:value="${edicion}?'Modificar':'Guardar'">
+						th:value="${edicion}?'Modificar':'Guardar'"
+						th:if="${userId == null}">
+
 				</form>
+
+				<div th:if="${edicion}">
+					<a th:href="@{/registro/listado}"
+						class="w-100 btn btn-outline-success">Regresar</a>
+				</div>
+
+			</div>
+
+			<div th:if="${userId}" class="text-center">
+				<h1>
+					Felicitaciones su numero de ID es: <span th:text="${userId}"></span>
+				</h1>
+				<a th:href="@{/index}" class="w-100 btn btn-outline-success">Regresar
+					a la página de inicio</a>
 			</div>
 
 		</div>
+
+
+
+
 
 		<!-- Final del contenido de la pagina  -->
 		<!-- CONTENIDO SECUNDARIO -->
@@ -99,5 +134,4 @@
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>
