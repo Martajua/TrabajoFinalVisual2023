@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title
+	th:text="${edicion}? 'Modificar datos de Usuario':'Nuevo Usuario'">Registrate</title>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+	<!-- ENCABEZADO -->
+	<header th:replace="~{layouts/header :: header}"></header>
+	<div class="b-example-divider"></div>
+	<div class="container">
+		<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+		<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		<div class="row">
+			<div class="col-md-12 text-justify p-2">
+				<form
+					th:action="${edicion}?@{/registro/modificar}:@{/registro/guardar}"
+					class="form-signin text-center" th:object="${registro}"
+					method="post">
+					<input type="hidden" th:field="*{id}"> <input type="hidden"
+						th:field="*{estado}">
+					<h1 class="h3 mb-3 fw-normal">REGISTRATE</h1>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInput"
+							placeholder="Ana Laura" th:field="*{nombre}"> <label
+							for="floatingInput">Nombre</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+							th:errors="*{nombre}"></div>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInput"
+							placeholder="Torres" th:field="*{apellido}"> <label
+							for="floatingInput">Apellido</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('apellido')}"
+							th:errors="*{apellido}"></div>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="email" class="form-control" id="floatingInput"
+							placeholder="usuario@ejemplo.com" th:field="*{email}"> <label
+							for="floatingInput">Correo electrónico</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('email')}"
+							th:errors="*{email}"></div>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="date" class="form-control" id="floatingInput"
+							placeholder="18/09/1996" th:field="*{fechaNacimiento}"> <label
+							for="floatingInput">Fecha de Nacimiento</label>
+						<div class="text-danger"
+							th:if="${#fields.hasErrors('fechaNacimiento')}"
+							th:errors="*{fechaNacimiento}"></div>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="text" class="form-control" id="floatingInput"
+							placeholder="388-550-5899" th:field="*{telefono}"> <label
+							for="floatingInput">Teléfono</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('telefono')}"
+							th:errors="*{telefono}"></div>
+					</div>
+					<div class="form-floating mb-3">
+						<label for="floatingInput"></label> <select id="floatingInput"
+							name="sexo" class="form-select" th:field="*{sexo}">
+							<option value="" selected>Seleccione una opcion</option>
+							<option value="Femenino">Femenino</option>
+							<option value="Masculino">Masculino</option>
+						</select> <label for="floatingSelect">Sexo</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('sexo')}"
+							th:errors="*{sexo}"></div>
+					</div>
+
+					<div class="form-floating mb-3">
+						<input type="number" class="form-control" id="floatingInput"
+							placeholder="Estatura" th:field="*{estatura}"> <label
+							for="floatingInput">Estatura</label>
+						<div class="text-danger" th:if="${#fields.hasErrors('estatura')}"
+							th:errors="*{estatura}"></div>
+					</div>
+					<input class="w-100 btn btn-lg btn-outline-secondary" type="submit"
+						th:value="${edicion}?'Modificar':'Guardar'">
+				</form>
+			</div>
+
+		</div>
+
+		<!-- Final del contenido de la pagina  -->
+		<!-- CONTENIDO SECUNDARIO -->
+		<aside></aside>
+		<div class="b-example-divider"></div>
+		<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
