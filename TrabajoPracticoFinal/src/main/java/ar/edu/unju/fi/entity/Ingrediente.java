@@ -1,4 +1,3 @@
-
 package ar.edu.unju.fi.entity;
 
 import org.springframework.stereotype.Component;
@@ -26,7 +25,7 @@ public class Ingrediente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ingre_id")
-	private Integer id;
+	private Long id;
 
 	@Column(name = "ingre_estado")
 	private Boolean estado;
@@ -50,7 +49,7 @@ public class Ingrediente {
 	
 	public Ingrediente() { }
 
-	public Ingrediente(Integer id, Boolean estado, String nombre) {
+	public Ingrediente(Long id, Boolean estado, String nombre) {
 
 		this.id = id;
 		this.estado = estado;
@@ -61,9 +60,11 @@ public class Ingrediente {
 
 	// region Getters and Setters 
 	
-	public Integer getId() { return id; }
+	public Long getId() {
+		return id;
+	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
