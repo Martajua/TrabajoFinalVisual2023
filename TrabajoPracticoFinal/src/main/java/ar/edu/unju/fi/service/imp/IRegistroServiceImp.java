@@ -3,11 +3,12 @@ package ar.edu.unju.fi.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.IRegistroServiceRepository;
 import ar.edu.unju.fi.service.IRegistroService;
-
+@Service
 public class IRegistroServiceImp implements IRegistroService {
 
 	@Autowired
@@ -36,9 +37,19 @@ public class IRegistroServiceImp implements IRegistroService {
 	}
 
 	@Override
-	public Usuario findUsuarioById(Integer id) {
-		usuario = registroserviceRepository.findById(id).get();
+	public Usuario findUsuarioById(Long id) {
+		return registroserviceRepository.findById(id).get();
+	}
+
+	@Override
+	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	@Override
+	public void modificar(Usuario usuario) {
+		registroserviceRepository.save(usuario);
+		
 	}
 
 }

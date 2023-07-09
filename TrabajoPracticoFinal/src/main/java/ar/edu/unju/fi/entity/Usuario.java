@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Pattern.Flag;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -18,61 +20,73 @@ import java.time.LocalDate;
 public class Usuario {
 
 	// region Attributes
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="usu_id")
-	private Integer id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "usu_id")
+	private Long id;
+
 	@Column(name = "usu_estado")
 	private Boolean estado;
-	
+
 	@Column(name = "usu_nombre")
 	@NotBlank(message = "Introduce un nombre")
 	@Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres")
-	@Pattern(regexp = "[a-z A-Z]+", message = "Solo puede contener letras")
+	/* Con el PAttern acepta nombres con tilde */
+	@Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios")
 	private String nombre;
-	
+
 	@Column(name = "usu_apellido")
 	@NotBlank(message = "Introduce un apellido")
 	@Size(min = 3, max = 30, message = "El apellido solo puede contener entre 3 y 30 caracteres")
-	@Pattern(regexp = "[a-z A-Z]+", message = "Solo puede contener letras")
+	/* Con el PAttern acepta apellidos con tilde */
+	@Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El apellido solo puede contener letras y espacios")
 	private String apellido;
-	
+
 	@Column(name = "usu_email")
 	@Email(message = "Email no es correcto", regexp = ".*")
 	@NotBlank(message = "Debes introducir un email")
 	private String email;
-	
+
 	@Column(name = "usu_fechaNacimiento")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@PastOrPresent(message = "La fecha ingresada es incorrecta")
 	@NotNull(message = "Debes introducir una fecha")
 	private LocalDate fechaNacimiento;
-	
+
 	@Column(name = "usu_telefono")
-	@NotBlank(message = "Debes introducir un número de teléfono")
-	@Pattern(regexp = "0388-[0-9]{3}-[0-9]{4}")
+    @NotBlank(message = "Debes introducir un número de teléfono")
+    @Pattern(regexp = "^[0-9]+$", message = "El número de teléfono debe contener solo dígitos")
 	private String telefono;
-	
+
 	@Column(name = "usu_sexo")
 	@NotBlank(message = "Debes introducir tu sexo")
 	@Pattern(regexp = "masculino|femenino", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String sexo;
-	
+
 	@Column(name = "usu_estatura")
-	@NotEmpty(message = "Debes introducir tu estatura")
+	@NotNull(message = "Debes introducir tu estatura")
 	@Min(0)
 	private Float estatura;
+	
+	@Column(name = "usu_admin")
+	private Boolean admin=false;
 	// endregion
 
 	// region Constructors
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, Boolean estado, String nombre, String apellido, String email, LocalDate fechaNacimiento,
-			String telefono, String sexo, Float estatura) {
-
+	
+	public Usuario(Long id, Boolean estado,
+			@NotBlank(message = "Introduce un nombre") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
+			@NotBlank(message = "Introduce un apellido") @Size(min = 3, max = 30, message = "El apellido solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El apellido solo puede contener letras y espacios") String apellido,
+			@Email(message = "Email no es correcto", regexp = ".*") @NotBlank(message = "Debes introducir un email") String email,
+			@PastOrPresent(message = "La fecha ingresada es incorrecta") @NotNull(message = "Debes introducir una fecha") LocalDate fechaNacimiento,
+			@NotBlank(message = "Debes introducir un número de teléfono") @Pattern(regexp = "^[0-9]+$", message = "El número de teléfono debe contener solo dígitos") String telefono,
+			@NotBlank(message = "Debes introducir tu sexo") @Pattern(regexp = "masculino|femenino", flags = Flag.CASE_INSENSITIVE) String sexo,
+			@NotNull(message = "Debes introducir tu estatura") @Min(0) Float estatura, Boolean admin) {
+		super();
 		this.id = id;
 		this.estado = estado;
 		this.nombre = nombre;
@@ -82,16 +96,28 @@ public class Usuario {
 		this.telefono = telefono;
 		this.sexo = sexo;
 		this.estatura = estatura;
-
+		this.admin = admin;
 	}
+
+
 	// endregion
 
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
+
 	// region Getters and Setters
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -158,9 +184,10 @@ public class Usuario {
 	public void setEstatura(Float estatura) {
 		this.estatura = estatura;
 	}
-	// endregion
+	/* endregion */
 
-	// region Methods
+	// region Methods 
 	// endregion
 
 }
+ 
