@@ -23,21 +23,42 @@
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">RECETAS</h1>
-                    <p class="lead text-muted">¡Bienvenido/a a nuestra sección de recetas saludables de nutrición! Aquí encontrarás una variedad de opciones deliciosas y nutritivas para ayudarte a mantener una alimentación saludable y equilibrada. Nuestras recetas están diseñadas para satisfacer tus necesidades nutricionales y gustos personales. Desde opciones vegetarianas y veganas hasta platos bajos en carbohidratos y ricos en proteínas, tenemos algo para todos los gustos. Además, nuestras recetas son fáciles de preparar y no requieren ingredientes costosos o difíciles de encontrar. Nos enfocamos en utilizar alimentos frescos y naturales para ayudarte a mantener una alimentación saludable y sostenible. Ya sea que estés buscando opciones para el desayuno, el almuerzo, la cena o los refrigerios, nuestras recetas te brindarán opciones deliciosas y nutritivas para satisfacer tus necesidades diarias. ¡Explora nuestra selección de recetas y comienza a disfrutar de una alimentación saludable hoy mismo!</p>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Categorías</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Carne</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Bebidas</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Dulces</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Ensaladas</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Legumbres y Cereales</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Pescados</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Pan</a></li>
-                            <li><a class="dropdown-item" th:href="@{/index}">Recetas de Sopas y Cremas</a></li>
-                        </ul>
-                    </div>
-                </div>
+                    <p class="lead text-muted">¡Bienvenido/a a nuestra sección de recetas saludables de nutrición! 
+                    							Aquí encontrarás una variedad de opciones deliciosas y nutritivas para ayudarte a 
+                    							mantener una alimentación saludable y equilibrada. Nuestras recetas están diseñadas 
+                    							para satisfacer tus necesidades nutricionales y gustos personales. Desde opciones vegetarianas 
+                    							y veganas hasta platos bajos en carbohidratos y ricos en proteínas, tenemos algo para todos los 
+                    							gustos. Además, nuestras recetas son fáciles de preparar y no requieren ingredientes costosos o 
+                    							difíciles de encontrar. Nos enfocamos en utilizar alimentos frescos y naturales para ayudarte a 
+                    							mantener una alimentación saludable y sostenible. Ya sea que estés buscando opciones para el desayuno,
+                    							 el almuerzo, la cena o los refrigerios, nuestras recetas te brindarán opciones deliciosas y nutritivas 
+                    							 para satisfacer tus necesidades diarias. ¡Explora nuestra selección de recetas y comienza a disfrutar de 
+                    							 una alimentación saludable hoy mismo!</p>
+					<!-- <div class="dropdown">
+						<button class="btn btn-outline-secondary dropdown-toggle"
+							type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+							aria-expanded="false">Categorías</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<li th:each="categoria : ${categorias}"><a
+								class="dropdown-item" th:href="@{/index}"
+								th:text="${'Recetas de ' + categoria}"></a></li>
+						</ul>
+					</div> -->
+
+
+					<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Categorías</button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" th:href="@{/receta/listado}">Todas las Recetas</a></li>
+        <li th:each="categoria : ${categorias}">
+            <a class="dropdown-item" th:href="@{/receta/listado(palabraClave=${categoria})}" th:text="${'Recetas de ' + categoria}"></a>
+        </li>
+    </ul>
+</div>
+
+
+
+				</div>
             </div>
         </section>
         <div th:each="receta : ${recetas}" class="row featurette">

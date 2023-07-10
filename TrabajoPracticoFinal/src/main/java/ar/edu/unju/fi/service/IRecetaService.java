@@ -15,4 +15,6 @@ public interface IRecetaService {
 	public Receta findRecetaById(Long id);
 
 	Receta getReceta();
+	
+	public List<Receta> mostrarCategoria(String palabraClave);
 }
