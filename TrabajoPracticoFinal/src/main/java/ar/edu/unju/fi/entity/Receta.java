@@ -47,7 +47,10 @@ public class Receta {
 	@NotBlank(message = "Debes seleccionar una categoria")
 	@Pattern(regexp = "Carnes|Bebidas|Dulces|Ensaladas|Legumbres y Cereales|Pescados|Pan|Sopas y Cremas", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String categoria;
-
+	
+	/**
+	 * mappedBy = "receta" es el objeto de la clase en la otra relacion.
+	 */
 	@OneToMany(mappedBy = "receta", fetch = FetchType.EAGER)
 	private List<Ingrediente> ingredientes;//una receta tiene muchos ingredientes
 
