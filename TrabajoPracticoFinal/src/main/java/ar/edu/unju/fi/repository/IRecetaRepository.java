@@ -13,7 +13,12 @@ import ar.edu.unju.fi.entity.Receta;
 public interface IRecetaRepository extends CrudRepository<Receta, Long> {
 
 	public List<Receta> findByEstado(boolean estado);
-	
+	/**
+	 * define una consulta personalizada en lenguaje JPQL para recuperar todas las recetas 
+	 * que coincidan con una determinada categoría.
+	 * @param categoria
+	 * @return retorna todas las recetas de una categoria
+	 */
 	@Query("SELECT r FROM Receta r WHERE r.categoria = :categoria")
 	public List<Receta> findAll(@Param("categoria") String categoria);
 }

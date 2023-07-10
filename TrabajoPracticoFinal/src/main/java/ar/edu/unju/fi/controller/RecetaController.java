@@ -57,7 +57,11 @@ public class RecetaController {
 	}
 	
 	
-	
+	/**
+	 * recibe la peticion para acceder a la pagina de la tabla de recetas
+	 * @param model
+	 * @return retorna a la pagina de gestion de recetas
+	 */
 	@GetMapping("/gestion")
 	public String gestionRecetas(Model model) {
 		model.addAttribute("recetas", recetaService.getAllRecetas());

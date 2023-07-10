@@ -55,18 +55,6 @@ public class RegistroController {
 	 * Recibe los datos enviados por el formulario y realiza el alta de un registro
 	 */
 
-	/*
-	 * @PostMapping("/guardar") public ModelAndView
-	 * getGuardarRegistro(@Valid @ModelAttribute("registro") Usuario usuario,
-	 * BindingResult result) { ModelAndView modelView = new
-	 * ModelAndView("registros"); if (result.hasErrors()) {
-	 * modelView.setViewName("form_registros"); modelView.addObject("registro",
-	 * usuario); return modelView; } usuario.setEstado(true);
-	 * registroService.addUsuario(usuario); modelView.addObject("registros",
-	 * registroService.getAllUsuarios()); return modelView; }
-	 */
-	
-	
 	@PostMapping("/guardar")
 	public ModelAndView getGuardarRegistro(@Valid @ModelAttribute("registro") Usuario usuario, BindingResult result) {
 	    ModelAndView modelView = new ModelAndView("form_registros");
@@ -86,10 +74,6 @@ public class RegistroController {
 
 	    return modelView;
 	}
-	
-	
-	
-	
 
 	/*
 	 * Carga la vista del formulario. Cuando la variable edición sea "verdadera" se
