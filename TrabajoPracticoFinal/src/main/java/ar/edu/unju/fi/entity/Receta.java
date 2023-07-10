@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,16 +11,15 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern.Flag;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
-
 @Entity
-
+@Component
 @Table(name = "recetas")
 public class Receta {
 
@@ -47,17 +45,16 @@ public class Receta {
 	@Column(name="receta_categoria")
   
 	@NotBlank(message = "Debes seleccionar una categoria")
-	@Pattern(regexp = "carnes|bebidas|dulces|ensaladas|legumbres y cereales|pescados|pan|sopas y cremas", flags = Pattern.Flag.CASE_INSENSITIVE)
+	@Pattern(regexp = "Carnes|Bebidas|Dulces|Ensaladas|Legumbres y Cereales|Pescados|Pan|Sopas y Cremas", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String categoria;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List <Ingrediente> ingredientes;
+	@OneToMany(mappedBy = "receta", fetch = FetchType.EAGER)
+	private List<Ingrediente> ingredientes;//una receta tiene muchos ingredientes
 
 	@Column(name = "receta_preparacion")
-	@NotBlank(message = "Introduce un nombre")
-	@Size(min = 3, max = 30, message = "La preparación solo puede contener entre 3 y 30 caracteres")
-	@Pattern(regexp = "[a-z A-Z 0-9]+", message = "Solo no puede contener caracteres especiales")
-	private String preparacion;
+	@NotBlank(message = "Introduce la preparación")
+    @Size(min = 3, max = 1000, message = "La preparación solo puede contener entre 3 y 1000 caracteres")
+    private String preparacion;
 
 	@Column(name = "receta_imagen")
 	@NotBlank(message = "Introduce una dirección URL")
@@ -70,9 +67,14 @@ public class Receta {
 	
 	public Receta() { }
 
-	public Receta(Long id, Boolean estado, String nombre, String categoria, List<Ingrediente> ingredientes,
-			String preparacion, String imagen) {
-
+	
+	public Receta(Long id, Boolean estado,
+			@NotEmpty(message = "El nombre no debe estar vacío") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
+			@NotBlank(message = "Debes seleccionar una categoria") @Pattern(regexp = "Carnes|Bebidas|Dulces|Ensaladas|Legumbres y Cereales|Pescados|Pan|Sopas y Cremas", flags = Flag.CASE_INSENSITIVE) String categoria,
+			List<Ingrediente> ingredientes,
+			@NotBlank(message = "Introduce la preparación") @Size(min = 3, max = 1000, message = "La preparación solo puede contener entre 3 y 1000 caracteres") String preparacion,
+			@NotBlank(message = "Introduce una dirección URL") @Size(min = 10, max = 100, message = "La dirección URL de la imagen solo puede contener entre 10 y 100 caracteres") String imagen) {
+		super();
 		this.id = id;
 		this.estado = estado;
 		this.nombre = nombre;
@@ -80,8 +82,26 @@ public class Receta {
 		this.ingredientes = ingredientes;
 		this.preparacion = preparacion;
 		this.imagen = imagen;
+	}
+	
+	
+	public Receta(Boolean estado,
+			@NotEmpty(message = "El nombre no debe estar vacío") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
+			@NotBlank(message = "Debes seleccionar una categoria") @Pattern(regexp = "Carnes|Bebidas|Dulces|Ensaladas|Legumbres y Cereales|Pescados|Pan|Sopas y Cremas", flags = Flag.CASE_INSENSITIVE) String categoria,
+			List<Ingrediente> ingredientes,
+			@NotBlank(message = "Introduce la preparación") @Size(min = 3, max = 1000, message = "La preparación solo puede contener entre 3 y 1000 caracteres") String preparacion,
+			@NotBlank(message = "Introduce una dirección URL") @Size(min = 10, max = 100, message = "La dirección URL de la imagen solo puede contener entre 10 y 100 caracteres") String imagen) {
+		super();
+		this.estado = estado;
+		this.nombre = nombre;
+		this.categoria = categoria;
+		this.ingredientes = ingredientes;
+		this.preparacion = preparacion;
+		this.imagen = imagen;
+	}
 
-	} // endregion
+
+	// endregion
 
 	// region Getters and Setters 
 	
@@ -141,6 +161,8 @@ public class Receta {
 
 	// endregion
 
-	// region Methods // endregion
+	// region Methods 
+	
+	// endregion
 
 }
