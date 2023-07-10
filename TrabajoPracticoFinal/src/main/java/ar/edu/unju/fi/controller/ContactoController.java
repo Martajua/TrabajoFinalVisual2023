@@ -11,7 +11,7 @@ public class ContactoController {
 	 * @return
 	 */
 	@GetMapping("/contacto")
-	public String getIndex() {
+	public String getContacto() {
 		return "contacto";
 	}
 }
