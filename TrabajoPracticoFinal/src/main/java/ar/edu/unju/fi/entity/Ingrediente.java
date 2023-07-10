@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,8 +14,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Component
 @Entity
+@Component
 @Table(name = "ingredientes")
 public class Ingrediente {
 
@@ -41,21 +40,43 @@ public class Ingrediente {
 	/*** Relacion ***/
 	
 	//con lazy se obtiene el id del contenido de la lista
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "receta_id")
-	private Receta receta;
+	@ManyToOne
+    @JoinColumn(name = "receta_id")
+    private Receta receta;
 
 	// region Constructors 
 	
 	public Ingrediente() { }
 
-	public Ingrediente(Long id, Boolean estado, String nombre) {
+	public Receta getReceta() {
+		return receta;
+	}
 
+	public void setReceta(Receta receta) {
+		this.receta = receta;
+	}
+
+	
+	public Ingrediente(Long id, Boolean estado,
+			@NotBlank(message = "Introduce un nombre") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
+			Receta receta) {
+		super();
 		this.id = id;
 		this.estado = estado;
 		this.nombre = nombre;
+		this.receta = receta;
+	}
+	
 
-	} 
+	public Ingrediente(Boolean estado,
+			@NotBlank(message = "Introduce un nombre") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
+			Receta receta) {
+		super();
+		this.estado = estado;
+		this.nombre = nombre;
+		this.receta = receta;
+	}
+
 	// endregion
 
 	// region Getters and Setters 
