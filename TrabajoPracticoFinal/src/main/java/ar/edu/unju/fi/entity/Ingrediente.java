@@ -41,7 +41,7 @@ public class Ingrediente {
 	
 	//con lazy se obtiene el id del contenido de la lista
 	@ManyToOne
-    @JoinColumn(name = "receta_id")
+    @JoinColumn(name = "receta_id")//columna que contiene la llave foranea
     private Receta receta;
 
 	// region Constructors 
