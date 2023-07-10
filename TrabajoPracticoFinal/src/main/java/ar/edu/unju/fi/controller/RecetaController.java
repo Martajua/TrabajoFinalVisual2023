@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,11 +42,20 @@ public class RecetaController {
 	 * 
 	 * @return
 	 */
+	
 	@GetMapping("/listado")
-	public String getListaRecetas(Model model) {
-		model.addAttribute("recetas", recetaService.getAllRecetas());
-		return "recetas";
+	public String getListaRecetas(Model model, @RequestParam(value = "palabraClave", required = false) String palabraClave) {
+	    List<Receta> recetas;
+	    if (palabraClave != null) {
+	        recetas = recetaService.mostrarCategoria(palabraClave);
+	    } else {
+	        recetas = recetaService.getAllRecetas();
+	    }
+	    model.addAttribute("recetas", recetas);
+	    model.addAttribute("categorias", commonService.getCategorias());
+	    return "recetas";
 	}
+	
 	
 	
 	@GetMapping("/gestion")

@@ -47,5 +47,12 @@ public class RecetaServiceImp implements IRecetaService {
 	public Receta getReceta() {
 		return receta;
 	}
-
+	/**
+	 * metodo para poder filtrar por categoria
+	 * @param palabraClave
+	 * @return ingreso una categoria y me devuelve todas las recetas de esa caategoria
+	 */
+	public List<Receta> mostrarCategoria(String palabraClave){
+		return recetaRepository.findAll(palabraClave);
+	}
 }
