@@ -78,14 +78,7 @@ public class Usuario {
 	}
 
 	
-	public Usuario(Long id, Boolean estado,
-			@NotBlank(message = "Introduce un nombre") @Size(min = 3, max = 30, message = "El nombre solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El nombre solo puede contener letras y espacios") String nombre,
-			@NotBlank(message = "Introduce un apellido") @Size(min = 3, max = 30, message = "El apellido solo puede contener entre 3 y 30 caracteres") @Pattern(regexp = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+", message = "El apellido solo puede contener letras y espacios") String apellido,
-			@Email(message = "Email no es correcto", regexp = ".*") @NotBlank(message = "Debes introducir un email") String email,
-			@PastOrPresent(message = "La fecha ingresada es incorrecta") @NotNull(message = "Debes introducir una fecha") LocalDate fechaNacimiento,
-			@NotBlank(message = "Debes introducir un número de teléfono") @Pattern(regexp = "^[0-9]+$", message = "El número de teléfono debe contener solo dígitos") String telefono,
-			@NotBlank(message = "Debes introducir tu sexo") @Pattern(regexp = "masculino|femenino", flags = Flag.CASE_INSENSITIVE) String sexo,
-			@NotNull(message = "Debes introducir tu estatura") @Min(0) Float estatura, Boolean admin) {
+	public Usuario(Long id, Boolean estado, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono, String sexo,Float estatura, Boolean admin) {
 		super();
 		this.id = id;
 		this.estado = estado;
