@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gestión de Datos</title>
+		<!-- imagen que podemos poner fijarse -->
+		<link th:rel="shortcut icon" th:href="@{../static/images/PONERIMAGEN.JPG}"> 
+		<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	    <link th:rel="stylesheet" th:href="@{/css/estilos.css}"> 
+	</head>
+	<body>
+	<!-- ENCABEZADO -->
+		<header th:replace="~{layouts/header :: header}"></header>
+		<div class="b-example-divider"></div>
+	<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+	<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		
+		<!-- INICIO DE SESION -->
+		<form class="text-center" class="form-signin">
+			<img class="mb-4" th:src="" width="72" height="57">
+			<h1 class="h3 mb-3 fw-normal">INICIO DE SESION</h1>
+				<div class="form-floating">
+				<input type="email" class="form-control" id="floatingInput"
+									placeholder="usuario@ejemplo.com">
+					<label for="floatingInput">Correo electrónico</label>
+				</div>
+				<div class="form-floating">
+				<input type="password" class="form-control" id="floatingPassword"
+									placeholder="Contraseña">
+					<label for="floatingPassword">Contraseña</label>
+				</div>
+				<div class="checkbox mb-3">
+					<label>
+				<input type="checkbox" value="remember-me"> Recuérdame
+					</label>
+				</div>
+			<button class="w-100 btn btn-lg btn-outline-secondary" type="submit">Ingresar</button>
+		</form>
+		
+		<!-- NUEVO Y EDITAR RECETA -->
+		<form th:action="${edicion}?@{/receta/modificar}:@{/receta/guardar}" class="text-center" class="form-signin" th:object="${receta}" method="post">
+			<img class="mb-4" th:src="" width="72" height="57">
+			<h1 class="h3 mb-3 fw-normal">RECETA</h1>
+				<div class="form-floating">
+				<input type="text" class="form-control" id="floatingInput"
+									placeholder="Ensalada de Rucula" th:field="*{nombre}">
+					<label for="floatingInput">Nombre</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+				</div>
+				<div class="form-floating">
+					<label for="floatingInput">Categoria</label>
+					<select id="floatingInput" th:field="*{categoria}">
+						<option value="" selected>Seleccione una opcion</option>
+						<option value="carne">Carne</option>
+						<option value="bebida">Bebidas</option>
+						<option value="dulces">Dulces</option>
+						<option value="ensaladas">Ensaladas</option>
+						<option value="legumbres y cereales">Legumbres y cerales</option>
+						<option value="pescados">Pescados</option>
+						<option value="pan">Pan</option>
+						<option value="sopas y cremas">Sopas y Cremas</option>
+					</select>
+					<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+				</div>
+		<div th:each="ingrediente, ingredienteStatus : *{ingredientes}">
+			<h3>Ingrediente [[${ingredienteStatus.index + 1}]]</h3>
+			<div>
+				<label for="nombre" th:text="#{ingrediente.nombre}">Nombre:</label>
+				<input type="text" id="nombre"
+					name="ingredientes[__${ingredienteStatus.index}__].nombre"
+					th:value="${ingrediente.nombre}" />
+				<div class="text-danger"
+					th:if="${#fields.hasErrors('ingredientes[' + ingredienteStatus.index + '].nombre')}"
+					th:errors="*{ingredientes[__${ingredienteStatus.index}__].nombre}"></div>
+			</div>
+		</div>
+		<div class="form-floating">
+				<input type="file" class="form-control" id="floatingInput"
+									placeholder="" th:field="*{imagen}">
+					<label for="floatingInput">Selecciona una imagen</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}"></div>
+				</div>
+				  
+			<button class="w-100 btn btn-lg btn-outline-secondary" type="submit">Guardar</button>
+		</form>
+		
+		<!-- SERVICIOS -->
+			<!-- calcular imc -->
+
+	<!-- calcular peso ideal -->
+			
+					
+		<!-- Final del contenido de la pagina  -->
+	<!-- CONTENIDO SECUNDARIO -->
+		<aside th:replace="~{layouts/aside :: aside}"></aside>
+		<div class="b-example-divider"></div>
+	<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
