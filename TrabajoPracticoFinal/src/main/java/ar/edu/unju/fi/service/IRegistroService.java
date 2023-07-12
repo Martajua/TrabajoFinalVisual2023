@@ -2,6 +2,7 @@
 package ar.edu.unju.fi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import ar.edu.unju.fi.entity.Usuario;
 
@@ -18,4 +19,6 @@ public interface IRegistroService {
 	Usuario getUsuario();
 	
 	void modificar(Usuario usuario);
+	
+	Optional<Usuario> buscarUsuarioById(Long id);
 }

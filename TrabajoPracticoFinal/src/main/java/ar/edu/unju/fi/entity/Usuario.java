@@ -1,18 +1,20 @@
 package ar.edu.unju.fi.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
-import jakarta.validation.constraints.Pattern.Flag;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @Entity
@@ -69,8 +71,22 @@ public class Usuario {
 	@Min(0)
 	private Float estatura;
 	
+	
+	
+	/*
+	 * @Column(name = "usu_peso")
+	 * 
+	 * @NotNull(message = "Debes introducir tu peso")
+	 * 
+	 * @Min(value = 0, message = "El peso debe ser mayor que cero") private Float
+	 * peso;
+	 */
+	
 	@Column(name = "usu_admin")
 	private Boolean admin=false;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<IndiceMasaCorporal> indicesMasaCorporal;
 	// endregion
 
 	// region Constructors
@@ -180,6 +196,20 @@ public class Usuario {
 	/* endregion */
 
 	// region Methods 
+	
+	public String calcularImc(float peso) {
+        float imc = peso / (estatura * estatura);
+        String mensaje;
+        if (imc < 18.5) {
+            mensaje = "Su IMC es " + String.format("%.2f", imc) + " - Está por debajo de su peso ideal";
+        } else if (imc <= 25) {
+            mensaje = "Su IMC es " + String.format("%.2f", imc) + " - Está en su peso normal";
+        } else {
+            mensaje = "Su IMC es " + String.format("%.2f", imc) + " - Tiene sobrepeso";
+        }
+        return mensaje;
+    }
+	
 	// endregion
 
 }

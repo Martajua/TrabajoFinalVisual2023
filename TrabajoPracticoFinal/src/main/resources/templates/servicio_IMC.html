@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link th:rel="stylesheet" th:href="@{/css/estilos.css}">
+<title>Calcular IMC</title>
+</head>
+<body>
+	<!-- ENCABEZADO -->
+	<header th:replace="~{layouts/header :: header}"></header>
+	<div class="b-example-divider"></div>
+	<div class="container">
+		<!-- BARRA DE NAVEGACION -->
+		<nav th:replace="~{layouts/nav :: nav} "></nav>
+		<div class="b-example-divider"></div>
+		<!-- CONTENIDO PRIMARIO -->
+		<!-- Inicio del contenido de la pagina -->
+		<div class="px-4 py-5 my-5 text-center">
+	<img class="d-block mx-auto mb-4" th:src="@{/images/pngegg.png}" width="72" height="57">
+	<h1 class="display-5 fw-bold">CALCULAR IMC</h1>
+	<div class="col-lg-6 mx-auto">
+		<p class="lead mb-4">
+			Bienvenido/a a nuestros servicios de salud y bienestar. Nos complace ofrecerte la oportunidad de calcular tu índice de masa corporal (IMC).<br>
+			El IMC es una medida que se utiliza para evaluar si una persona tiene un peso saludable en relación con su altura. Para calcular tu IMC, necesitamos que nos proporciones tu peso y tu ID de usuario. Una vez que tengamos esta información, podemos realizar el cálculo y brindarte una evaluación de tu estado actual de salud.
+		</p>
+		<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+			<!-- Formulario para ingresar el peso y el ID de usuario -->
+			<form th:action="@{/servicio/calcular-imc}" method="POST" th:object="${imc}">
+				<input type="hidden" th:field="*{fechaImc}">
+				<!-- Campo de entrada para el peso -->
+				<div class="mb-3">
+					<label for="peso" class="form-label">Peso en Kg:</label>
+					<input type="number" class="form-control" id="peso" name="peso" required>
+				</div>
+				<!-- Campo de entrada para el ID de usuario -->
+				<div class="mb-3">
+					<label for="idUsuario" class="form-label">ID de Usuario:</label>
+					<input type="text" class="form-control" id="idUsuario" name="idUsuario" required>
+				</div>
+				<!-- Botón para calcular el IMC -->
+				<button type="submit" class="btn btn-success btn-lg px-4 gap-3">Calcular IMC</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Tabla de registros IMC -->
+<div class="row">
+	<div class="col-12">
+		<table class="table mt-4" th:if="${registrosImc}">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Fecha</th>
+					<th>IMC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="registro : ${registrosImc}">
+					<td th:text="${registro.usuario.nombre}"></td>
+					<td th:text="${registro.usuario.apellido}"></td>
+					<td th:text="${#temporals.format(registro.fechaImc, 'dd/MM/yyyy')}"></td>
+					<td th:text="${registro.imc}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Mensaje de resultado del cálculo -->
+<div class="row">
+	<div class="col-12 mt-4" th:if="${resultadoImc}">
+		<p th:text="${resultadoImc}"></p>
+	</div>
+</div>
+
+<!-- Mensaje de error -->
+<div class="row">
+	<div class="col-12 mt-4" th:if="${error}">
+		<p th:text="${error}"></p>
+	</div>
+</div>
+		<!-- CONTENIDO SECUNDARIO -->
+		<aside></aside>
+		<div class="b-example-divider"></div>
+		<!-- PIE DE PAGINA -->
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+	</div>
+
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
