@@ -1,87 +1,63 @@
-/*
- * package ar.edu.unju.fi.controller;
- * 
- * import org.springframework.beans.factory.annotation.Autowired; import
- * org.springframework.stereotype.Controller; import
- * org.springframework.ui.Model; import
- * org.springframework.validation.BindingResult; import
- * org.springframework.web.bind.annotation.*;
- * 
- * import ar.edu.unju.fi.entity.IndiceMasaCorporal; import
- * ar.edu.unju.fi.entity.Usuario; import
- * ar.edu.unju.fi.service.IIndiceMasaCorporalService; import
- * jakarta.validation.Valid;
- * 
- * @Controller
- * 
- * @RequestMapping("/imc") public class ServicioController {
- * 
- * 
- * la anotación @RequestMapping("/imc") indica que todas las solicitudes que
- * comiencen con "/servicio" serán manejadas por los métodos de este
- * controlador. Por ejemplo, si hay un método en el controlador con la
- * anotación @GetMapping("/listado"), se mapeará a la URL "/imc/listado".
- * 
- * 
- * @Autowired private IIndiceMasaCorporalService imcService;
- * 
- *//**
+package ar.edu.unju.fi.controller;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import ar.edu.unju.fi.entity.IndiceMasaCorporal;
+import ar.edu.unju.fi.entity.Usuario;
+import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
+import ar.edu.unju.fi.service.IRegistroService;
+import jakarta.validation.Valid;
+
+@Controller
+
+@RequestMapping("/servicio")
+public class ServicioController {
+
+	@Autowired
+	private IIndiceMasaCorporalService imcService;
+	@Autowired
+	private IRegistroService registroserviceRepository;
+
+	/**
 	 * Metodo que captura una peticion http en la forma de una url devuelve la
 	 * pagina a mostrar.
-	 * 
-	 * @return
 	 */
-/*
- * 
- * @GetMapping("/inicioServicios") public String getInicioServicios() { return
- * "servicios"; }
- * 
- *//**
-	 * recibe un id y muestra en la vista los registros de IMC de una persona.
-	 * 
-	 * @param model
-	 * @param id
-	 * @return
-	 */
-/*
- * @GetMapping("/listado/{id}") public String getListaIMCPage(Model
- * model, @PathVariable(value = "id") Long id) { //metodos de la capa service
- * return "VISTA DE REGISTROS IMC"; }
- * 
- *//**
-	 * La función de este método es mostrar la página para calcular el IMC del
-	 * usuario correspondiente al id de usuario proporcionado.
-	 * 
-	 * @param id
-	 * @param model
-	 * @param usuario
-	 * @return
-	 */
-/*
- * @GetMapping("/calcular/{id}") public String calcularIMC(@PathVariable(value =
- * "id") Long id, Model model, Usuario usuario) { //metodos de la capa service
- * return "calcular_imc"; }
- * 
- *//**
-	 * Este método recibe el código de usuario como parte de la URL, captura los
-	 * datos enviados en el formulario como un objeto de la entidad
-	 * IndiceMasaCorporal, realiza la validación de dicho objeto y maneja los
-	 * errores de validación. Luego, agrega el objeto "imc" y otros datos al modelo
-	 * para ser utilizados en la vista correspondiente.
-	 * 
-	 * @param id
-	 * @param imc
-	 * @param result
-	 * @param model
-	 * @return
-	 *//*
-		 * 
-		 * @PostMapping("/calcular/{id}") public String
-		 * guardarIMC(@Valid @PathVariable(value = "id") Long id, @ModelAttribute("imc")
-		 * IndiceMasaCorporal imc, BindingResult result, Model model) { if
-		 * (result.hasErrors()) { //metodos de la capa service return "calcular_imc"; }
-		 * 
-		 * //metodos de la capa service
-		 * 
-		 * return "redirect:/imc/listado"; } }
-		 */
+
+	@GetMapping("/nuevoIMC")
+    public String getInicioServicios(Model model) {
+        IndiceMasaCorporal imc = new IndiceMasaCorporal(); // Crear un objeto IndiceMasaCorporal vacío
+        model.addAttribute("imc", imc); // Agregar el objeto imc como atributo de la solicitud
+        return "servicio_IMC";
+    }
+
+	@PostMapping("/calcular-imc")
+	public String calcularImc(@Valid @ModelAttribute IndiceMasaCorporal imc, @RequestParam("peso") float peso,
+			@RequestParam("idUsuario") Long idUsuario, BindingResult result, Model model) {
+		Optional<Usuario> usuarioOptional = registroserviceRepository.buscarUsuarioById(idUsuario);
+
+		if (result.hasErrors() || !usuarioOptional.isPresent()) {
+			model.addAttribute("imc", imc);
+			model.addAttribute("error", "Error al calcular el IMC");
+			return "servicio_IMC";
+		}
+
+		Usuario usuario = usuarioOptional.get();
+		String resultadoImc = usuario.calcularImc(peso);
+		imc.setFechaImc(LocalDate.now());
+		imc.setUsuario(usuario);
+		imc.setEstado(true);
+		imcService.addIMC(imc);
+
+		model.addAttribute("imc", imc);
+		model.addAttribute("resultadoImc", resultadoImc);
+		model.addAttribute("registrosImc", imcService.getAllImcByUsuario(usuario));
+		return "servicio_IMC";
+	}
+}

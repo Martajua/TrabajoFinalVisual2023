@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,11 @@ public class IRegistroServiceImp implements IRegistroService {
 	public void modificar(Usuario usuario) {
 		registroserviceRepository.save(usuario);
 		
+	}
+
+	@Override
+	public Optional<Usuario> buscarUsuarioById(Long id) {
+		return registroserviceRepository.findById(id);
 	}
 
 }
